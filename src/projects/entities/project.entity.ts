@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Project as ProjectModel, ProjectStatus } from '@/generated/prisma';
+import { Project as ProjectModel, ProjectStatus } from '@prisma/client';
 
 export class Project implements ProjectModel {
   constructor(partial: Partial<Project>) {
