@@ -1,6 +1,6 @@
 import {ApiProperty} from "@nestjs/swagger";
 
-export class Member {
+export class MemberEntity {
     @ApiProperty({example: "1"})
     id: bigint;
 
