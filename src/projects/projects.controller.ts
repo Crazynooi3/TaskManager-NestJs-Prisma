@@ -1,10 +1,9 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus} from "@nestjs/common";
-import {ProjectsService} from "./projects.service";
+import {ProjectResponse} from "@/response-wrapper";
+import {Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post} from "@nestjs/common";
+import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {CreateProjectDto} from "./dto/create-project.dto";
 import {UpdateProjectDto} from "./dto/update-project.dto";
-import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
-import {ProjectEntity} from "./entities/project.entity";
-import {ProjectResponse} from "@/response-wrapper";
+import {ProjectsService} from "./projects.service";
 @ApiTags("Projects")
 @Controller("projects")
 export class ProjectsController {
