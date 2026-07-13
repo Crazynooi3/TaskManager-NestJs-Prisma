@@ -4,9 +4,9 @@ export class MemberEntity {
     @ApiProperty({example: "1"})
     id: bigint;
 
-    @ApiProperty({example: "My first name"})
-    first_name: string;
+    @ApiProperty({example: "John"})
+    firstName: string;
 
-    @ApiProperty({example: "My first name"})
-    last_name: string;
+    @ApiProperty({example: "Doe"})
+    lastName: string;
 }

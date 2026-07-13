@@ -1,26 +1,33 @@
-import { Injectable } from '@nestjs/common';
-import { CreateMemberDto } from './dto/create-member.dto';
-import { UpdateMemberDto } from './dto/update-member.dto';
+import {PrismaService} from "@/prisma.service";
+import {Injectable} from "@nestjs/common";
+import {CreateMemberDto} from "./dto/create-member.dto";
+import {UpdateMemberDto} from "./dto/update-member.dto";
 
 @Injectable()
 export class MemberService {
-  create(createMemberDto: CreateMemberDto) {
-    return 'This action adds a new member';
-  }
+    constructor(private prisma: PrismaService) {}
 
-  findAll() {
-    return `This action returns all member`;
-  }
+    create(createMemberDto: CreateMemberDto) {
+        return this.prisma.member.create({data: createMemberDto});
+    }
 
-  findOne(id: number) {
-    return `This action returns a #${id} member`;
-  }
+    findAll() {
+        return this.prisma.member.findMany();
+    }
 
-  update(id: number, updateMemberDto: UpdateMemberDto) {
-    return `This action updates a #${id} member`;
-  }
+    findOne(id: bigint) {
+        return this.prisma.member.findUnique({where: {id}});
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} member`;
-  }
+    findByFirstName(firstName: string) {
+        return this.prisma.member.findMany({where: {firstName}});
+    }
+
+    update(id: bigint, updateMemberDto: UpdateMemberDto) {
+        return this.prisma.member.update({where: {id}, data: updateMemberDto});
+    }
+
+    remove(id: bigint) {
+        return this.prisma.member.delete({where: {id}});
+    }
 }
