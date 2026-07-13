@@ -1,34 +1,45 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ProjectsService } from './projects.service';
-import { CreateProjectDto } from './dto/create-project.dto';
-import { UpdateProjectDto } from './dto/update-project.dto';
+import {Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus} from "@nestjs/common";
+import {ProjectsService} from "./projects.service";
+import {CreateProjectDto} from "./dto/create-project.dto";
+import {UpdateProjectDto} from "./dto/update-project.dto";
 
-@Controller('projects')
+@Controller("projects")
 export class ProjectsController {
-  constructor(private readonly projectsService: ProjectsService) {}
+    constructor(private readonly projectsService: ProjectsService) {}
 
-  @Post()
-  create(@Body() createProjectDto: CreateProjectDto) {
-    return this.projectsService.create(createProjectDto);
-  }
+    @Post()
+    create(@Body() createProjectDto: CreateProjectDto) {
+        return this.projectsService.create(createProjectDto);
+    }
 
-  @Get()
-  findAll() {
-    return this.projectsService.findAll();
-  }
+    @Get()
+    findAll() {
+        return this.projectsService.findAll();
+    }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.projectsService.findOne(+id);
-  }
+    @Get("active")
+    findAllActive() {
+        return this.projectsService.findAllActive();
+    }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto) {
-    return this.projectsService.update(+id, updateProjectDto);
-  }
+    @Get(":notActive")
+    findAllNotActive() {
+        return this.projectsService.findAllNotActive();
+    }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.projectsService.remove(+id);
-  }
+    @Get(":id")
+    findOne(@Param("id") id: string) {
+        return this.projectsService.findOne(BigInt(id));
+    }
+
+    @Patch(":id")
+    update(@Param("id") id: string, @Body() updateProjectDto: UpdateProjectDto) {
+        return this.projectsService.update(BigInt(id), updateProjectDto);
+    }
+
+    @Delete(":id")
+    @HttpCode(HttpStatus.NO_CONTENT)
+    remove(@Param("id") id: string) {
+        return this.projectsService.remove(BigInt(id));
+    }
 }
