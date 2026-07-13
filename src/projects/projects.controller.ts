@@ -2,12 +2,17 @@ import {Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus}
 import {ProjectsService} from "./projects.service";
 import {CreateProjectDto} from "./dto/create-project.dto";
 import {UpdateProjectDto} from "./dto/update-project.dto";
-
+import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
+import {ProjectEntity} from "./entities/project.entity";
+import {ProjectResponse} from "@/response-wrapper";
+@ApiTags("Projects")
 @Controller("projects")
 export class ProjectsController {
     constructor(private readonly projectsService: ProjectsService) {}
 
     @Post()
+    @ApiOperation({summary: "Create a new project"})
+    @ApiResponse({status: 200, type: ProjectResponse, description: "Project created successfully"})
     create(@Body() createProjectDto: CreateProjectDto) {
         return this.projectsService.create(createProjectDto);
     }

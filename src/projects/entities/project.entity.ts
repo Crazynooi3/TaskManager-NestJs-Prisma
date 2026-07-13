@@ -1,16 +1,14 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { Project as ProjectModel, ProjectStatus } from '@prisma/client';
+// entities/project.entity.ts
+import {ApiProperty} from "@nestjs/swagger";
+import {ProjectStatus} from "@prisma/client";
 
-export class Project implements ProjectModel {
-  constructor(partial: Partial<Project>) {
-    Object.assign(this, partial);
-  }
-  @ApiProperty()
-  declare id: bigint;
+export class ProjectEntity {
+    @ApiProperty({example: "1"})
+    id: bigint;
 
-  @ApiProperty()
-  declare name: string;
+    @ApiProperty({example: "My Project"})
+    name: string;
 
-  @ApiProperty({ enum: ProjectStatus })
-  declare status: ProjectStatus;
+    @ApiProperty({enum: ProjectStatus, example: ProjectStatus.Active})
+    status: ProjectStatus;
 }
