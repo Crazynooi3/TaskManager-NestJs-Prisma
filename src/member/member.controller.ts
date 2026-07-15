@@ -30,7 +30,10 @@ export class MemberController {
         return this.memberService.findOne(BigInt(id));
     }
 
-    findByFirstName;
+    @Get()
+    findByFirstName(@Body() updateMemberDto: UpdateMemberDto) {
+        return;
+    }
 
     @Patch(":id")
     @ApiOperation({summary: "Update member with ID + name and last name"})
